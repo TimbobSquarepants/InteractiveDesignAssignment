@@ -1,0 +1,332 @@
+<meta charset="UTF-8"> 
+<style>
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    min-width: 470px;
+}
+
+div {
+    border-style: inset;
+    border-color: #BBBBBB;
+    border-width: 1px;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    border-radius: 4px;
+    overflow: auto;
+}
+
+div.outer {
+    margin: 10px;
+    height: calc(100% - 110px);
+    overflow: hidden;
+}
+
+div.inner {
+    width: 100%;
+    height: 100%;
+    border-width: 0px;
+}
+
+div.innerright {
+    margin-top: 40px;
+    width: calc(42% - 50px);
+    height: calc(100% - 80px);
+    float: right;
+}
+
+div.innerthree {
+    width: calc(100% - 50px);
+    height: calc(33% - 60px);
+    margin-bottom: 15px;
+    overflow: auto;
+}
+
+div.innermiddle {
+    height: auto;
+    width: 36%;
+    position: fixed;
+    top: calc(32% - 50px);
+    left: 32%;
+    padding-top: 3px;
+    overflow: auto;
+    min-width: 150px;
+}
+
+div.event {
+    height: auto;
+    overflow: auto;
+    background-color: #EEEEEE;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+
+h1, h2, h3, h4, p, h5 {
+    font-family: "Arial";
+    font-weight: lighter;
+    color: #333333;
+}
+
+h1 {
+    margin-left: 10px;
+    font-size: 24px;
+}
+
+h2, h3, h4, h5 {
+    font-size: 18px;
+    line-height: 0;
+}
+
+h3 {
+    text-align: center;
+    line-height: 0.5;
+}
+
+h4 {
+    line-height: 1;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+h5 {
+    line-height: 1;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+p {
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+input[type=text].loginbox, input[type=password].loginbox {
+    width: 60%;
+    padding: 4px;
+    border: solid 1px;
+    border-radius: 4px;
+    font-family: "Arial";
+    font-size: 18px;
+}
+
+button {
+    font-family: "Arial";
+    font-size: 18px;
+    text-align: center;
+    margin-top: 8px;
+}
+
+@media screen and (min-width : 1700px) {
+    div.outer {
+        height: calc(100% - 150px);
+    }
+    div.innerthree {
+        height: calc(33% - 75px);
+    }
+    input[type=text].loginbox, input[type=password].loginbox {
+        font-size: 24px;
+    }
+    h1 {
+        font-size: 32px;
+    }
+    h2, h3, h5 {
+        font-size: 26px;
+    }
+    h4 {
+        font-size: 24px;
+    }
+    p {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width : 800px) {
+    div.outer {
+        height: calc(100% - 150px);
+    }
+    input[type=text].loginbox, input[type=password].loginbox {
+        font-size: 14px;
+    }
+    h1 {
+        font-size: 18px;
+    }
+    h2, h3, h5 {
+        font-size: 14px;
+    }
+    h4 {
+        font-size: 12px;
+    }
+    p {
+        font-size: 12px;
+    }
+}
+
+</style>
+<html>
+<body>
+<h1 id="datething">FlinSafe Security Service </h1>
+<div class="outer" id="outerbox">
+    <div class="innermiddle" id="logindiv">
+        <h3>Log In</h3>
+        <h2>Username:</h2>
+        <input type="text" class="loginbox" id="usern"></input>
+        <h2>Password:</h2>
+        <input type="password" class="loginbox" id="passw"></input>
+        </br><button onclick="loginbutton()">Log In</button>
+        <h4 id="loginmessage" style="color: #FF3333;"></h4>
+    </div>
+    <div class="innermiddle" id="loadingdiv">
+        <br/><br/><br/><h3 id="loadingtext">Logging you in</h3><br/><br/><br/>
+    </div>
+    <div class="inner" id="maindiv" style="display: inline-block;">
+        <h2>Critical Events</h2>
+        <div class="innerthree" id="critevent">
+            <div class="event" id="event1" onclick="selectEvent1()">
+		<h5 id="event1text"></h5>
+                <h5 style="color: #999999; float: right;">Tap to interact</h5>
+            </div>
+        </div>
+        <h2>Ongoing Events</h2>
+        <div class="innerthree" id="ongoingevent">
+            <div class="event" id="event2" onclick="selectEvent2()">
+		<h5 id="event2text"></h5>
+                <h5 style="color: #999999; float: right;">Tap to interact</h5>
+            </div>
+        </div>
+        <h2>Closed Events</h2>
+        <div class="innerthree" id="closedevent">
+        </div>
+    </div>
+    <div class="innerright" id="responsepanel">
+    </div>
+</div>
+<p>air0008 chri0286 fin0066</p>
+</body>
+</html>
+
+
+<script>
+document.getElementById("loadingdiv").style.display = "none";
+document.getElementById("maindiv").style.display = "none";
+document.getElementById("event1").style.display = "none";
+document.getElementById("responsepanel").style.display = "none";
+var d = new Date();
+document.getElementById("datething").innerHTML += "\xa0\xa0\xa0" + d.getHours() + ":" + d.getMinutes() + "\xa0\xa0\xa0" + d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear();
+function loginbutton () {
+    var loginname = document.getElementById("usern").value;
+    var pass = document.getElementById("passw").value;
+    if(loginname == ""){
+        document.getElementById("loginmessage").innerHTML = "Please enter a username."
+    } else if(loginname == "security" || loginname == "Security"){
+        if(pass != ""){
+            document.getElementById("logindiv").style.display = "none";
+            document.getElementById("loadingdiv").style.display = "block";
+            setTimeout("loading()", 500);
+            setTimeout("loading()", 1000);
+            setTimeout("loading()", 1500);
+            setTimeout("loaded()", 2000);
+        } else {
+            document.getElementById("loginmessage").innerHTML = "Please enter a password."
+        }
+    } else {
+        document.getElementById("loginmessage").innerHTML = "Username does not exist, please check username."
+    }
+}
+
+function loading () {
+    document.getElementById("loadingtext").innerHTML += ".";
+}
+
+function loaded () {
+    document.getElementById("loadingdiv").style.display = "none";
+    document.getElementById("maindiv").style.display = "inline-block";
+    document.getElementById("datething").innerHTML = "Gerald O'neal - Logged In" + "\xa0\xa0\xa0" + d.getHours() + ":" + d.getMinutes() + "\xa0\xa0\xa0" + d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear();
+    setTimeout("setEvent1()", 5000);
+    setTimeout("initEvent1Type()", 12000);
+    setEvent2();
+}
+
+function initEvent1Type () {
+    event1type = "Intruder on Campus";
+    setEvents();
+}
+
+function setEvents () {
+    setEvent1();
+    setEvent2();
+    if(event1selected == "true" || event2selected == "true" || event3selected == "true"){
+        document.getElementById("maindiv").style.width = "calc(60% - 50px)";
+        document.getElementById("responsepanel").style.display = "block";
+    } else {
+        document.getElementById("maindiv").style.width = "calc(100% - 50px)";
+    }
+}
+
+function selectEvent1 () {
+    if(event1selected == "false"){
+        event1selected = "true";
+        event2selected = "false";
+        event3selected = "false";
+    } else {
+        event1selected = "false";
+    }
+    setEvents();
+}
+
+function selectEvent2 () {
+    if(event2selected == "false"){
+        event1selected = "false";
+        event2selected = "true";
+        event3selected = "false";
+    } else {
+        event2selected = "false";
+    }
+    setEvents();
+}
+
+var event1room = "G.42";
+var event1type = "Unknown";
+var event1time = d.getHours() + ":" + d.getMinutes();
+var event1status = "Unchecked";
+var event1selected = "false";
+
+function setEvent1 () {
+    document.getElementById("event1text").innerHTML = "Room: " + event1room + " | Type: " + event1type + " | Time: " + event1time + " | Status: " + event1status;
+    document.getElementById("event1").style.display = "block";
+    if(event1status == "Unchecked"){
+        document.getElementById("event1").style.border = "outset";
+        document.getElementById("event1").style.borderWidth = "2px";
+    } else {
+        document.getElementById("event1").style.border = "inset";
+        document.getElementById("event1").style.borderWidth = "1px";
+    }
+    if(event1selected == "true"){
+        document.getElementById("event1").style.backgroundColor = "#CCCCCC";
+    } else {
+        document.getElementById("event1").style.backgroundColor = "#EEEEEE";
+    }
+}
+
+var event2status = "Ongoing";
+var event2selected = "false";
+
+function setEvent2 () {
+    document.getElementById("event2text").innerHTML = "All buses delayed by 20 mins | Status: " + event2status;
+    document.getElementById("event2").style.display = "block";
+    if(event2selected == "true"){
+        document.getElementById("event2").style.backgroundColor = "#CCCCCC";
+    } else {
+        document.getElementById("event2").style.backgroundColor = "#EEEEEE";
+    }
+}
+
+var event3selected = "false";
+
+</script>
+
+
