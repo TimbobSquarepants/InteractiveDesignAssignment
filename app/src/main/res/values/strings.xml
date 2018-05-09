@@ -27,6 +27,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="test2">rawr</string>
     <string name="test3">rwawr</string>
+    <string name="descriptionHolder">Please enter a description of the events in this field.</string>
 
     <string name="API_KEY">AIzaSyA8-ywxK85wdR9_O0wNfmD3p_1PHN1MO08</string>
 
