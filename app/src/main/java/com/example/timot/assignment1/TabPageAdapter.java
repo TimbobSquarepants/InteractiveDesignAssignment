@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class TabPageAdapter extends FragmentStatePagerAdapter {
 
-    String[] tabArray = new String[]{"Create Security Report", "View Security Reports", "Find Security Kiosk"};
+    String[] tabArray = new String[]{"View Security Report", "Create Security Reports", "Find Security Kiosk"};
     Integer tabNumber = 3;
 
     public TabPageAdapter(FragmentManager fm) {
@@ -26,13 +26,13 @@ public class TabPageAdapter extends FragmentStatePagerAdapter {
         switch (position) {
 
             case 0:
-                CreateReport create = new CreateReport();
-                return create;
-
-            case 1:
                 ViewReports view = new ViewReports();
                 return view;
 
+
+            case 1:
+                CreateReport create = new CreateReport();
+                return create;
             case 2:
                 FindKiosk find = new FindKiosk();
                 return find;

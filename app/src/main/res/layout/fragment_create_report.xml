@@ -42,12 +42,13 @@
 
         <MultiAutoCompleteTextView
             android:id="@+id/multiAutoCompleteTextView2"
+            android:elevation="4dp"
             android:layout_width="289dp"
             android:layout_height="106dp"
             android:layout_marginEnd="160dp"
             android:layout_marginStart="36dp"
             android:layout_marginTop="12dp"
-            android:text="MultiAutoCompleteTextView"
+            android:hint="Add Description here"
             android:textAppearance="@style/TextAppearance.AppCompat"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -67,7 +68,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/submitButton"
             android:layout_width="150dp"
             android:layout_height="47dp"
             android:layout_marginEnd="117dp"
@@ -89,7 +90,8 @@
             android:layout_marginEnd="84dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="32dp"
-            android:text="AutoCompleteTextView"
+            android:hint="Location where Incident happened"
+            android:text=""
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.466"
