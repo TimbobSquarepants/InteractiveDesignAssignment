@@ -188,7 +188,7 @@ button.responsebutton {
         <h2>Username:</h2>
         <input type="text" class="loginbox" id="usern"></input>
         <h2>Password:</h2>
-        <input type="password" class="loginbox" id="passw" onkeypress="checkloginbutton()"></input>
+        <input type="password" class="loginbox" id="passw"></input>
         </br><button id="loginbutton" onclick="loginbutton()">Log In</button>
         <h4 id="loginmessage" style="color: #FF3333;"></h4>
     </div>
@@ -215,13 +215,12 @@ button.responsebutton {
         </div>
     </div>
     <div class="innerright" id="responsepanel" style="padding-left: 30px; padding-right: 30px">
-        <button id="voicebutton" style="height: calc(25% - 20px); width: 32%; margin-left: 34%;">(speaker icon)</button>
+        <button id="voicebutton" style="height: calc(25% - 20px); width: 32%; margin-left: 34%;" onclick="voicebuttonclick()">(speaker icon)</button>
         <h3 id="voicetext">Not Connected</h3>
-        <div id="responsemessagefield" style="height: calc(30% - 20px); width: calc(100% - 30px);"></div>
-        <input type="text" class="loginbox" id="sendmessagebox" style="width: 60%; display: inline-block; margin-top: 7px;"></input>
-        <button id="sendmessagebutton"; style="width: 35%; padding-top: 15px; padding-bottom: 15px; margin-top: 0; margin-right: 2%; float: right;">Send</button>
+        <div id="responsemessagefield" style="height: calc(30% - 20px); width: calc(100% - 30px);"><h5 id="responsemessagefieldtext"></h5></div>
+        <input type="text" class="loginbox" id="sendmessagebox" title="Type message here" style="width: 60%; display: inline-block; margin-top: 7px;"></input>
+        <button id="sendmessagebutton"; style="width: 35%; padding-top: 15px; padding-bottom: 15px; margin-top: 0; margin-right: 2%; float: right;" onclick="sendmessageclick()">Send</button>
         </br></br><div id="responsebuttoncontainer" style="padding-top: 0px; padding-bottom: 0px; padding-left: 0px; padding-right: 0px; border: none; width: auto; display: inline;">
-            <button class="responsebutton">Mark Responded</button>
         </div>
         <div style="float: right; padding-top: 0px; padding-bottom: 0px; padding-left: 0px; padding-right: 0px; border: none; width: auto; display: inline;">
             <button class="responsebutton" style="margin-right: 6%;" onclick="closepanel()">Close Panel</button>
@@ -261,12 +260,9 @@ function loginbutton () {
     }
 }
 
-// Get the input field
 var input = document.getElementById("passw");
-
-// Execute a function when the user releases a key on the keyboard
 input.addEventListener("keydown", function(event) {
-  if (event.keyCode === 13) {
+  if (event.keyCode == 13) {
     document.getElementById("loginbutton").click();
   }
 }); 
@@ -280,9 +276,38 @@ function loaded () {
     document.getElementById("maindiv").style.display = "inline-block";
     document.getElementById("titlething").innerHTML = "Gerald O'neal - Logged In";
     document.getElementById("loadingtext").innerHTML = "Logging you in";
-    setTimeout("setEvent1()", 5000);
-    setTimeout("initEvent1Type()", 12000);
+    setTimeout("setEvent1()", 2000);
+	setTimeout("cricketbat()", 8000);
+    setTimeout("initEvent1Type()", 15000);
     setEvent2();
+}
+
+function cricketbat () {
+	var c = new Date();
+	if(document.getElementById("responsemessagefieldtext").innerHTML != ""){
+		document.getElementById("responsemessagefieldtext").innerHTML += "<br/>";
+	}
+	saveMessageLog();
+	event1messagelog += c.getHours() + ":" + c.getMinutes() + " G.42: help there is a man running around with a cricket bat";
+	loadMessageLog();
+}
+
+function sendmessageclick () {
+    var p = new Date();
+	if(document.getElementById("responsemessagefieldtext").innerHTML != ""){
+		document.getElementById("responsemessagefieldtext").innerHTML += "<br/>";
+	}
+	document.getElementById("responsemessagefieldtext").innerHTML += p.getHours() + ":" + p.getMinutes() + " Gerald: " + document.getElementById("sendmessagebox").value;
+	document.getElementById("sendmessagebox").value = "";
+}
+
+function voicebuttonclick () {
+	var vt = document.getElementById("voicetext");
+	if(vt.innerHTML == "Not Connected"){
+		vt.innerHTML = "Connected";
+	} else {
+		vt.innerHTML = "Not Connected";
+	}
 }
 
 function logout () {
@@ -298,29 +323,90 @@ function initEvent1Type () {
     setEvents();
 }
 
+function loadResponseButton () {
+	var r = document.getElementById("responsebuttoncontainer");
+	var q = "";
+	if(event1selected == "true"){
+		q = event1status;
+	} else if (event2selected == "true") {
+		q = event2status;
+	}
+	if(q == "Unchecked"){
+			r.innerHTML = "<button class=\"responsebutton\" onclick=\"markResponded()\">Mark Responded</button>";
+		} else if (q == "Responded To"){
+			r.innerHTML = "<button class=\"responsebutton\" onclick=\"markClosed()\">Mark Closed</button>";
+		} else if (q == "Closed"){
+			r.innerHTML = "<button class=\"responsebutton\" onclick=\"markOpen()\">Mark Open</button>";
+		} else {
+			r.innerHTML = "";
+		}
+}
+
+function markResponded () {
+	event1status = "Responded To";
+	setEvents();
+}
+
+function markClosed () {
+	event1status = "Closed";
+	document.getElementById("closedevent").innerHTML += document.getElementById("critevent").innerHTML;
+	document.getElementById("critevent").innerHTML = "";
+	setEvents();
+}
+
+function markOpen () {
+	event1status = "Unchecked";
+	document.getElementById("critevent").innerHTML += document.getElementById("closedevent").innerHTML;
+	document.getElementById("closedevent").innerHTML = "";
+	setEvents();
+}
+
 function setEvents () {
+	saveMessageLog();
     setEvent1();
     setEvent2();
-    if(event1selected == "true" || event2selected == "true" || event3selected == "true"){
+    if(event1selected == "true" || event2selected == "true"){
         document.getElementById("maindiv").style.width = "calc(67% - 50px)";
         document.getElementById("responsepanel").style.display = "block";
     } else {
         document.getElementById("maindiv").style.width = "calc(100% - 50px)";
     }
+	if(event2selected == "true"){
+		document.getElementById("voicebutton").disabled = true;
+	} else {
+		document.getElementById("voicebutton").disabled = false;
+	}
+	loadMessageLog();
+	loadResponseButton();
 }
 
 function closepanel () {
     event1selected = "false";
     event2selected = "false";
-    event3selected = "false";
     setEvents();
 }
 
+function saveMessageLog () {
+	if(event1selected == "true"){
+		event1messagelog = document.getElementById("responsemessagefieldtext").innerHTML;
+	} else if (event2selected == "true") {
+		event2messagelog = document.getElementById("responsemessagefieldtext").innerHTML;
+	}
+}
+
+function loadMessageLog () {
+	if(event1selected == "true"){
+		document.getElementById("responsemessagefieldtext").innerHTML = event1messagelog;
+	} else if (event2selected == "true") {
+		document.getElementById("responsemessagefieldtext").innerHTML = event2messagelog;
+	}
+}
+
 function selectEvent1 () {
+	saveMessageLog ();
     if(event1selected == "false"){
         event1selected = "true";
         event2selected = "false";
-        event3selected = "false";
     } else {
         event1selected = "false";
     }
@@ -328,10 +414,11 @@ function selectEvent1 () {
 }
 
 function selectEvent2 () {
+	saveMessageLog();
+	document.getElementById("voicetext").innerHTML = "Not Connected";
     if(event2selected == "false"){
         event1selected = "false";
         event2selected = "true";
-        event3selected = "false";
     } else {
         event2selected = "false";
     }
@@ -343,6 +430,7 @@ var event1type = "Unknown";
 var event1time = d.getHours() + ":" + d.getMinutes();
 var event1status = "Unchecked";
 var event1selected = "false";
+var event1messagelog = "";
 
 function setEvent1 () {
     document.getElementById("event1text").innerHTML = "Room: " + event1room + " | Type: " + event1type + " | Time: " + event1time + " | Status: " + event1status;
@@ -363,6 +451,7 @@ function setEvent1 () {
 
 var event2status = "Ongoing";
 var event2selected = "false";
+var event2messagelog = "Management: All buses will be delayed by 20 minutes. Please make use of the metro app for up to date information on timetables and delays.";
 
 function setEvent2 () {
     document.getElementById("event2text").innerHTML = "All buses delayed by 20 mins | Status: " + event2status;
@@ -373,8 +462,6 @@ function setEvent2 () {
         document.getElementById("event2").style.backgroundColor = "#EEEEEE";
     }
 }
-
-var event3selected = "false";
 
 </script>
 
