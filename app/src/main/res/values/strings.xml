@@ -15,7 +15,7 @@
     </string>
 
 
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Welcome to Flin Safe Max</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Flin Safe</string>
@@ -30,5 +30,6 @@
     <string name="descriptionHolder">Please enter a description of the events in this field.</string>
 
     <string name="API_KEY">AIzaSyA8-ywxK85wdR9_O0wNfmD3p_1PHN1MO08</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

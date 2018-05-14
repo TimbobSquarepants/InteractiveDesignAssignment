@@ -7,11 +7,11 @@
         <item
             android:id="@+id/create_security_report"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Create Security Report" />
+            android:title="Ring Security" />
         <item
             android:id="@+id/view_security_report"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="View Security Report's" />
+            android:title="Watch Information Video's" />
         <item
             android:id="@+id/find_security_kiosk"
             android:icon="@drawable/ic_menu_slideshow"
@@ -19,7 +19,7 @@
         <item
             android:id="@+id/help"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Help" />
+            android:title="Account Settings" />
     </group>
 
     <item android:title="Communicate">

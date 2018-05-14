@@ -26,12 +26,12 @@
             <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="View Security Report" />
+                android:text="View All Security Reports" />
 
             <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Create Security Reports" />
+                android:text="Create Security Report" />
 
             <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
