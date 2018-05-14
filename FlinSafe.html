@@ -22,7 +22,7 @@ div {
 
 div.outer {
     margin: 10px;
-    height: calc(100% - 110px);
+    height: calc(100% - 150px);
     overflow: hidden;
 }
 
@@ -55,6 +55,30 @@ div.innermiddle {
     padding-top: 3px;
     overflow: auto;
     min-width: 150px;
+}
+
+div.innermiddlex {
+    height: auto;
+    width: 50%;
+    position: fixed;
+    top: calc(32% - 50px);
+    left: 25%;
+    padding-top: 3px;
+    overflow: auto;
+    min-width: 150px;
+	background: rgba(255, 255, 255, 1);
+}
+
+div.innermiddley {
+    height: auto;
+    width: 36%;
+    position: fixed;
+    top: calc(32% - 50px);
+    left: 32%;
+    padding-top: 3px;
+    overflow: auto;
+    min-width: 150px;
+	background: rgba(255, 255, 255, 1);
 }
 
 div.event {
@@ -179,9 +203,11 @@ button.responsebutton {
 </style>
 <html>
 <body>
-<h1 id="titlething" style="display: inline;">FlinSafe Security Service</h1>
+<img src="logo1.png" style="display: inline-block; width: 100px; height: 50px; margin-top: 10px; margin-left: 10px;"></img>
+<h1 id="titlething" style="display: inline;"></h1>
 <h1 id="datething" style="display: inline;"></h1>
-<h1 id="logout" style="display: inline; color: #6699FF; margin-left: 15%;" onclick="logout()">Log Out</h1>
+<button id="execbutton" style="display: none; color: #3366FF; margin-left: 5%;" onclick="createReport()">Create Report</button>
+<button id="logout" style="display: none; color: #3366FF; margin-left: 1%;" onclick="logout()">Log Out</button>
 <div class="outer" id="outerbox">
     <div class="innermiddle" id="logindiv">
         <h3>Log In</h3>
@@ -193,7 +219,7 @@ button.responsebutton {
         <h4 id="loginmessage" style="color: #FF3333;"></h4>
     </div>
     <div class="innermiddle" id="loadingdiv">
-        <br/><br/><br/><h3 id="loadingtext">Logging you in</h3><br/><br/><br/>
+        <br/><br/><br/><h3 id="loadingtext">Logging you in</h3><br/><img src="logo2.png" style="width: 150px; height: 150px; margin-left: auto; margin-right: auto; display: block;"></img><br/><br/>
     </div>
     <div class="inner" id="maindiv" style="display: inline-block;">
         <h2>Critical Events</h2>
@@ -226,6 +252,56 @@ button.responsebutton {
             <button class="responsebutton" style="margin-right: 6%;" onclick="closepanel()">Close Panel</button>
         </div>
     </div>
+	<div class="innermiddlex" id="report1" style="display: none;">
+		<h3>Create Report</h3>
+		<div style="height: auto; width: calc(50% - 30px); display: inline-block;">
+			<h2>Timeframe:</h2>
+			<table>
+				<tr align="left">
+				<th><h2 style="display: inline;">From:</h2></th><th><input type="date" style="margin-left: 15px;"></th>
+				</tr><tr align="left">
+				<th><h2 style="display: inline;">To:</h2></th><th><input type="date" style="margin-left: 15px;"></th>
+				</tr>
+			</table>
+		</div>
+		<div style="height: auto; width: calc(50% - 30px); display: inline-block; margin-left: 10px">
+			<h2>Include:</h2>
+			<table>
+				<tr align="left">
+				<th><h5 style="display: inline;">Reports:</h5></th><th><input type="checkbox" style="margin-left: 20px;" checked></th>
+				</tr><tr align="left">
+				<th><h5 style="display: inline;">Notifications:</h5></th><th><input type="checkbox" style="margin-left: 20px;"></th>
+				</tr><tr align="left">
+				<th><h5 style="display: inline;">Communication Logs:</h5></th><th><input type="checkbox" style="margin-left: 20px;"></th>
+				</tr><tr align="left">
+				<th><h5 style="display: inline;">Heatmap:</h5></th><th><input type="checkbox" style="margin-left: 20px;"></th>
+				</tr>
+			</table>
+		</div>
+		</br></br>
+		<button style="margin-left: 30px; display: inline; padding-left: 10px; padding-right: 10px;" onclick="exitcreatereport()">Exit</button>
+		<button style="float: right; margin-right: 30px;" onclick="report1continue()">Continue</button>
+	</div>
+	<div class="innermiddley" id="report2" style="display: none;">
+		<h3>Send To</h3>
+		<table align="center">
+			<tr>
+			<th><h2 style="display: inline;">Email:</h2><input type="text" id="emailtext" class="loginbox" style="width: 40%; margin-left: 10px;"></br></th>
+			</tr><tr>
+			<th><h5>For multiple recipients, enter each email separated by a comma</br>eg. [someone@example.com, someone-else@example.com]</h5></th>
+			</tr><tr>
+			<th><h4 id="emailerrortext" style="color: #FF3333;"></h4></th>
+			</tr>
+		</table>
+		<button style="margin-left: 30px; display: inline; padding-left: 10px; padding-right: 10px;" onclick="exitcreatereport()">Exit</button>
+		<button style="float: right; margin-right: 30px;" onclick="report2continue()">Continue</button>
+	</div>
+	<div class="innermiddley" id="report3" style="display: none;">
+		<table align="center">
+			<tr><th><h5 id="emailsuccesstext"></h5></th></tr>
+		</table>
+		<button style="margin-left: 30px; display: inline; padding-left: 10px; padding-right: 10px;" onclick="exitcreatereport()">Exit</button>
+	</div>
 </div>
 <p>air0008 chri0286 fin0066</p>
 </body>
@@ -260,11 +336,16 @@ function loginbutton () {
     }
 }
 
-var input = document.getElementById("passw");
-input.addEventListener("keydown", function(event) {
-  if (event.keyCode == 13) {
-    document.getElementById("loginbutton").click();
-  }
+document.getElementById("passw").addEventListener("keydown", function(event) {
+	if(event.keyCode == 13) {
+		document.getElementById("loginbutton").click();
+	}
+}); 
+
+document.getElementById("sendmessagebox").addEventListener("keydown", function(event) {
+	if(event.keyCode == 13) {
+		document.getElementById("sendmessagebutton").click();
+	}
 }); 
 
 function loading () {
@@ -274,12 +355,19 @@ function loading () {
 function loaded () {
     document.getElementById("loadingdiv").style.display = "none";
     document.getElementById("maindiv").style.display = "inline-block";
-    document.getElementById("titlething").innerHTML = "Gerald O'neal - Logged In";
+    document.getElementById("titlething").innerHTML = "Gerald O'neal";
     document.getElementById("loadingtext").innerHTML = "Logging you in";
+	document.getElementById("logout").style.display = "inline";
+	document.getElementById("execbutton").style.display = "inline";
     setTimeout("setEvent1()", 2000);
 	setTimeout("cricketbat()", 8000);
     setTimeout("initEvent1Type()", 15000);
     setEvent2();
+}
+
+function createReport () {
+	document.getElementById("report1").style.display = "block";
+	document.getElementById("execbutton").disabled = true;
 }
 
 function cricketbat () {
@@ -292,13 +380,37 @@ function cricketbat () {
 	loadMessageLog();
 }
 
-function sendmessageclick () {
-    var p = new Date();
-	if(document.getElementById("responsemessagefieldtext").innerHTML != ""){
-		document.getElementById("responsemessagefieldtext").innerHTML += "<br/>";
+function report1continue () {
+	document.getElementById("report1").style.display = "none";
+	document.getElementById("report2").style.display = "block";
+}
+
+function report2continue () {
+	if(document.getElementById("emailtext").value != ""){
+		document.getElementById("report2").style.display = "none";
+		document.getElementById("report3").style.display = "block";
+		document.getElementById("emailsuccesstext").innerHTML = "Report successfully sent to: [ " + document.getElementById("emailtext").value + " ]"
+	} else {
+		document.getElementById("emailerrortext").innerHTML = "Please enter at least 1 email address.";
 	}
-	document.getElementById("responsemessagefieldtext").innerHTML += p.getHours() + ":" + p.getMinutes() + " Gerald: " + document.getElementById("sendmessagebox").value;
-	document.getElementById("sendmessagebox").value = "";
+}
+
+function exitcreatereport () {
+	document.getElementById("report1").style.display = "none";
+	document.getElementById("report2").style.display = "none";
+	document.getElementById("report3").style.display = "none";
+	document.getElementById("execbutton").disabled = false;
+}
+
+function sendmessageclick () {
+	if(document.getElementById("sendmessagebox").value != ""){
+		var p = new Date();
+		if(document.getElementById("responsemessagefieldtext").innerHTML != ""){
+			document.getElementById("responsemessagefieldtext").innerHTML += "<br/>";
+		}
+		document.getElementById("responsemessagefieldtext").innerHTML += p.getHours() + ":" + p.getMinutes() + " Gerald: " + document.getElementById("sendmessagebox").value;
+		document.getElementById("sendmessagebox").value = "";
+	}
 }
 
 function voicebuttonclick () {
@@ -316,6 +428,11 @@ function logout () {
     document.getElementById("event1").style.display = "none";
     document.getElementById("responsepanel").style.display = "none";
     document.getElementById("logindiv").style.display = "block";
+	document.getElementById("logout").style.display = "none";
+	document.getElementById("execbutton").style.display = "none";
+	document.getElementById("report1").style.display = "none";
+	document.getElementById("report2").style.display = "none";
+	document.getElementById("report3").style.display = "none";
 }
 
 function initEvent1Type () {
@@ -403,23 +520,27 @@ function loadMessageLog () {
 }
 
 function selectEvent1 () {
-	saveMessageLog ();
     if(event1selected == "false"){
+		saveMessageLog();
+		event2selected = "false";
         event1selected = "true";
-        event2selected = "false";
+		loadMessageLog();
     } else {
+		saveMessageLog();
         event1selected = "false";
     }
     setEvents();
 }
 
 function selectEvent2 () {
-	saveMessageLog();
 	document.getElementById("voicetext").innerHTML = "Not Connected";
     if(event2selected == "false"){
+		saveMessageLog();
         event1selected = "false";
         event2selected = "true";
+		loadMessageLog();
     } else {
+		saveMessageLog();
         event2selected = "false";
     }
     setEvents();
