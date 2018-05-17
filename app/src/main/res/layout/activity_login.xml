@@ -113,5 +113,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_sign_in_button" />
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FAN: air0008 chri0286 finn0066"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="461dp" />
+
 
 </android.support.constraint.ConstraintLayout>
