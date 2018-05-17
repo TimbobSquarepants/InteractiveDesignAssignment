@@ -3,7 +3,9 @@ package com.example.timot.assignment1;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -41,6 +43,7 @@ public class ViewReports extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+
         incidentList = new ArrayList<>();
 
 
@@ -51,13 +54,14 @@ public class ViewReports extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-        incidentList.add(new Incident("Tonsley", "Serious", "Help we Neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedddddddddddddddddddddddddddddd HELPPPPPPPPPPPPP", "Bob", "123456789"));
-        incidentList.add(new Incident("Bedford", "Serious", "Help we Neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedddddddddddddddddddddddddddddd HELPPPPPPPPPPPPP", "Bob", "123456789"));
-        incidentList.add(new Incident("Sturt", "Serious", "Help we Neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedddddddddddddddddddddddddddddd HELPPPPPPPPPPPPP", "Bob", "123456789"));
+        incidentList.add(new Incident("Tonsley", "Serious", "Students are advised that a fire alarm is in effect. All students and staff are expected to wait untill alarm has passed.", "John Doe", "047123912"));
+        incidentList.add(new Incident("Sturt", "Moderate", "Ambulance personal are on site helping a student all staff and students should give way to ambulance members", "Polly Parrot", "047291312"));
+        incidentList.add(new Incident("Bedford", "Minor", "A spillage has been reported in the main hall cleaners are on route to deal with situation all students and staff advised to watch there step", "Arnold Bing", "047283912"));
 
 
         incidentAdapter = new incidentAdapter(getContext(), incidentList);
         recyclerView.setAdapter(incidentAdapter);
+
 
     }
 }

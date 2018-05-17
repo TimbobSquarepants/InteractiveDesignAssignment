@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/create_security_report"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_phone_in_talk_black_24dp"
             android:title="Ring Security" />
         <item
             android:id="@+id/view_security_report"
@@ -14,7 +14,7 @@
             android:title="Watch Information Video's" />
         <item
             android:id="@+id/find_security_kiosk"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_map_black_24dp"
             android:title="Find Security Kiosk" />
         <item
             android:id="@+id/help"

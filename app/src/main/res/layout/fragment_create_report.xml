@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateReport">
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".CreateReport"
+    android:focusable="true">
 
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
 
         <TextView
@@ -42,12 +45,12 @@
 
         <MultiAutoCompleteTextView
             android:id="@+id/multiAutoCompleteTextView2"
-            android:elevation="4dp"
             android:layout_width="289dp"
             android:layout_height="106dp"
             android:layout_marginEnd="160dp"
             android:layout_marginStart="36dp"
             android:layout_marginTop="12dp"
+            android:elevation="1dp"
             android:hint="Add Description here"
             android:textAppearance="@style/TextAppearance.AppCompat"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,10 +63,12 @@
             android:layout_width="64dp"
             android:layout_height="35dp"
             android:layout_marginBottom="32dp"
+            android:layout_marginEnd="7dp"
             android:layout_marginStart="36dp"
             android:layout_marginTop="40dp"
             android:text="Location :"
             app:layout_constraintBottom_toTopOf="@+id/textView5"
+            app:layout_constraintEnd_toStartOf="@+id/autoCompleteTextView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -85,16 +90,15 @@
 
         <AutoCompleteTextView
             android:id="@+id/autoCompleteTextView"
-            android:layout_width="191dp"
-            android:layout_height="36dp"
-            android:layout_marginEnd="84dp"
-            android:layout_marginStart="20dp"
+            android:layout_width="253dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="7dp"
             android:layout_marginTop="32dp"
             android:hint="Location where Incident happened"
             android:text=""
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.466"
             app:layout_constraintStart_toEndOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -102,4 +106,4 @@
     </android.support.constraint.ConstraintLayout>
 
 
-</FrameLayout>
+</ScrollView>

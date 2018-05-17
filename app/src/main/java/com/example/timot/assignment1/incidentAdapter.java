@@ -54,6 +54,8 @@ public class incidentAdapter extends RecyclerView.Adapter<incidentAdapter.Incide
         holder.textViewLocation.setText(incident.getLocation());
         holder.textViewStatus.setText(incident.getStatus());
         holder.textViewDescription.setText(incident.getDescription());
+        holder.textViewOfficer.setText(incident.getOfficer());
+        holder.textViewOfficerPhone.setText(incident.getOfficerPhone());
 
 
     }
@@ -86,7 +88,8 @@ public class incidentAdapter extends RecyclerView.Adapter<incidentAdapter.Incide
             textViewLocation = itemView.findViewById(R.id.locationText);
             textViewStatus = itemView.findViewById(R.id.statusText);
             textViewDescription = itemView.findViewById(R.id.incidentDescription);
-
+            textViewOfficer = itemView.findViewById(R.id.txtOfficerName);
+            textViewOfficerPhone = itemView.findViewById(R.id.txtOfficerPhone);
 
         }
     }

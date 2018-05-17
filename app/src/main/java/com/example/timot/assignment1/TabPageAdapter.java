@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class TabPageAdapter extends FragmentStatePagerAdapter {
 
-    String[] tabArray = new String[]{"View Security Report", "Create Security Reports", "Find Security Kiosk"};
+    String[] tabArray = new String[]{"View All Reports", "Report Incident", "Find Security Kiosk"};
     Integer tabNumber = 3;
 
     public TabPageAdapter(FragmentManager fm) {

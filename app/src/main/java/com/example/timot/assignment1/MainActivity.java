@@ -100,17 +100,17 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.create_security_report) {
             //  getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new CreateReport()).commit();
-            Toast.makeText(this, "Feature Not Implemented Yet s", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Feature Not Implemented Yet", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.view_security_report) {
             // getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ViewReports()).commit();
-            Toast.makeText(this, "Feature Not Implemented Yet s", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Feature Not Implemented Yet", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.find_security_kiosk) {
             // getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new FindKiosk()).commit();
-            Toast.makeText(this, "Feature Not Implemented Yet s", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Feature Not Implemented Yet", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.help) {
-            Toast.makeText(this, "Feature Not Implemented Yet s", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Feature Not Implemented Yet", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.sign_out) {
             new AlertDialog.Builder(MainActivity.this)
