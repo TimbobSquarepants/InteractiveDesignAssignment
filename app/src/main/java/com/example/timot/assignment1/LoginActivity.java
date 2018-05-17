@@ -233,7 +233,7 @@ public class LoginActivity extends AppCompatActivity {
     private boolean isEmailValid(String email) {
 
 
-        return email.equalsIgnoreCase("MaxPayne@gmail.com");
+        return email.equalsIgnoreCase("maxpayne@flinders.edu.au");
     }
 
     private boolean isPasswordValid(String password) {

@@ -49,20 +49,29 @@ public class CreateReport extends Fragment {
             public void onClick(View v) {
 
 
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("Submit Report")
-                        .setMessage("Are you sure you want to submit your report to Administration ? (Reports need to be approved before showing) ").setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        descriptionTxt.setText("");
-                        txtLocation.setText("");
-                        Snackbar.make(view, "Report Submitted Succesfully Thankyou for your help", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
+                if (isDescriptionValid(txtLocation.getText().toString()) == true) {
+                    txtLocation.setError("Cannot submit empty location please enter something");
+
+                } else if (isDescriptionValid(descriptionTxt.getText().toString()) == true) {
+                    descriptionTxt.setError("Cannot submit empty description please enter something");
+                } else {
 
 
-                    }
-                }).setNegativeButton("NO", null).show();
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("Submit Report")
+                            .setMessage("Are you sure you want to submit your report to Administration ? (Reports need to be approved before showing) ").setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            descriptionTxt.setText("");
+                            txtLocation.setText("");
+                            Snackbar.make(view, "Report Submitted Succesfully Thankyou for your help", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
 
+
+                        }
+                    }).setNegativeButton("NO", null).show();
+
+                }
             }
         });
 
@@ -75,6 +84,11 @@ public class CreateReport extends Fragment {
     }
 
 
+    private boolean isDescriptionValid(String description) {
+
+
+        return description.isEmpty();
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
